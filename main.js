@@ -9,7 +9,7 @@ import View from 'ol/View';
 import OSM from 'ol/source/OSM.js';
 import { Style, Fill, Stroke } from 'ol/style';
 import { transform } from 'ol/proj';
-import Overlay from 'ol/Overlay';
+import Overlay from 'ol/Overlay'
 
 // ✅ Capa base OSM
 const baseLayer = new TileLayer({
@@ -86,7 +86,7 @@ const vectorLayer2 = new VectorLayer({
 
 // ✅ Mapa principal
 const map = new Map({
-  target: 'map-container',
+  target: 'map-content',
   layers: [baseLayer, vectorLayer, vectorLayer2],
   view: new View({
     center: transform([-74.0, 4.5], 'EPSG:4326', 'EPSG:3857'),
