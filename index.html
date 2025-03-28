@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Geovisor</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol/ol.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geovisor</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol/ol.css" />
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<div id="map-container"></div>
-
+  <!-- Archivo JavaScript -->
 <script type="module" src="main.js"></script>
 
+    <div id="map-header">
+        <img src="./img/PNG_Logo_OIM_.png" alt="Encabezado" id="map-logo">
+    </div>
+    <div id="map-content">
+        </div>
+        <style>
+          html, body, #map-container {
+            margin: 0;
+            height: 100%;
+            width: 100%;
+            font-family: sans-serif;
+            background-color: #04041b;
+          }
+        </style>   
 </body>
 </html>
-
-<div id="map-header">
-  <img src="./img/PNG_Logo_OIM_.png" alt="Encabezado" id="map-logo">
-</div>
-<div id="map-container"></div>
