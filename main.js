@@ -1,31 +1,18 @@
-// ✅ Importación de OpenLayers
-import 'ol/ol.css';
-import GeoJSON from 'ol/format/GeoJSON';
-import Map from 'ol/Map';
-import TileLayer from 'ol/layer/Tile';
-import VectorLayer from 'ol/layer/Vector';
-import VectorSource from 'ol/source/Vector';
-import View from 'ol/View';
-import OSM from 'ol/source/OSM.js';
-import { Style, Fill, Stroke } from 'ol/style';
-import { transform } from 'ol/proj';
-import Overlay from 'ol/Overlay'
-
-// ✅ Capa base OSM
-const baseLayer = new TileLayer({
-  source: new OSM(),
+/ ✅ Capa base OSM
+const baseLayer = new ol.layer.Tile({
+  source: new ol.source.OSM(),
 });
 
 // ✅ Fuente GeoJSON 1 (PIN)
-const vectorSource = new VectorSource({
+const vectorSource = new ol.source.Vector({
   url: './data/pin_deptos2.geojson',
-  format: new GeoJSON(),
+  format: new ol.format.GeoJSON(),
 });
 
 // ✅ Fuente GeoJSON 2 (IPM)
-const vectorSource2 = new VectorSource({
+const vectorSource2 = new ol.source.Vector({
   url: './data/IPM.geojson',
-  format: new GeoJSON(),
+  format: new ol.format.GeoJSON(),
 });
 
 // ✅ Estilos por atributo
@@ -45,9 +32,9 @@ const getStyleByPIN = (feature) => {
     fillColor = 'rgba(255, 0, 0, 0.5)';
   }
 
-  return new Style({
-    fill: new Fill({ color: fillColor }),
-    stroke: new Stroke({ color: '#ffffff', width: 1 }),
+  return new ol.style.Style({
+    fill: new ol.style.Fill({ color: fillColor }),
+    stroke: new ol.style.Stroke({ color: '#ffffff', width: 1 }),
   });
 };
 
@@ -56,50 +43,51 @@ const getStyleByIPM = (feature) => {
 
   let fillColor;
   if (value < 25) {
-    fillColor = 'rgba(250, 196, 149, 0.6)';   // 
+    fillColor = 'rgba(250, 196, 149, 0.6)';
   } else if (value < 50) {
-    fillColor = 'rgba(245, 163, 90, 0.6)';    // 
+    fillColor = 'rgba(245, 163, 90, 0.6)';
   } else if (value < 80) {
-    fillColor = 'rgba(207, 124, 67, 0.6)';    // 
-  } else if (value > 80) {
-    fillColor = 'rgba(169, 106, 72, 0.6)';    // 
-   }
+    fillColor = 'rgba(207, 124, 67, 0.6)';
+  } else {
+    fillColor = 'rgba(169, 106, 72, 0.6)';
+  }
 
-  return new Style({
-    fill: new Fill({ color: fillColor }),
-    stroke: new Stroke({ color: '#ffffff', width: 1 }),
+  return new ol.style.Style({
+    fill: new ol.style.Fill({ color: fillColor }),
+    stroke: new ol.style.Stroke({ color: '#ffffff', width: 1 }),
   });
 };
 
 // ✅ Capas vectoriales
-const vectorLayer = new VectorLayer({
+const vectorLayer = new ol.layer.Vector({
   source: vectorSource,
   style: getStyleByPIN,
   visible: false,             // 🔥 Oculta la capa por defecto
 });
 
-const vectorLayer2 = new VectorLayer({
+const vectorLayer2 = new ol.layer.Vector({
   source: vectorSource2,
   style: getStyleByIPM,
   visible: false,             // 🔥 Oculta la capa por defecto
 });
 
 // ✅ Mapa principal
-const map = new Map({
+const map = new ol.Map({
   target: 'map-content',
   layers: [baseLayer, vectorLayer, vectorLayer2],
-  view: new View({
-    center: transform([-74.0, 4.5], 'EPSG:4326', 'EPSG:3857'),
+  view: new ol.View({
+    center: ol.proj.transform([-74.0, 4.5], 'EPSG:4326', 'EPSG:3857'),
     zoom: 6,
   }),
 });
+
 
 // ✅ Popup dinámico
 const container = document.createElement('div');
 container.className = 'ol-popup';
 document.body.appendChild(container);
 
-const popup = new Overlay({
+const popup = new ol.Overlay({       // 🛠️ Cambia "Overlay" por "ol.Overlay"
   element: container,
   autoPan: true,
   autoPanAnimation: { duration: 250 },
@@ -137,6 +125,7 @@ map.on('pointermove', (event) => {
   const hit = map.hasFeatureAtPixel(event.pixel);
   map.getViewport().style.cursor = hit ? 'pointer' : '';
 });
+
 
 // ✅ Controles de visibilidad
 const controlsContainer = document.createElement('div');
@@ -225,3 +214,4 @@ const toggleLayer = (layer, checkboxId, legend) => {
 
 toggleLayer(vectorLayer, 'layer1', legendPIN);
 toggleLayer(vectorLayer2, 'layer2', legendIPM);
+
