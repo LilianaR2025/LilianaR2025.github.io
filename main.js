@@ -1,4 +1,4 @@
-/ ✅ Capa base OSM
+// ✅ Capa base OSM
 const baseLayer = new ol.layer.Tile({
   source: new ol.source.OSM(),
 });
