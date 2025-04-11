@@ -46,7 +46,7 @@
 #controls-container {
   position: absolute;
   top: 10px;
-  left: 10px; /* Mantiene el control a la izquierda */
+  right: 10px; /* Mantiene el control a la izquierda */
   background: #fff;
   padding: 15px;
   border: 1px solid #ccc;
