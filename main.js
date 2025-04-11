@@ -260,7 +260,10 @@ controlsContainer.innerHTML = `
 <label><em>*UNGRD. Datos abiertos, 2025</em></label>
 <br>
 <label>
-  
+<br>
+<label><em>Procesamiento EGI OIM</em></label>
+<br>
+<label>
 `;
 
 document.body.appendChild(controlsContainer);
