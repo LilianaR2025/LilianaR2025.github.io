@@ -77,7 +77,7 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
-  justify-content: flex-end;  /* Alinea el contenido hacia la derecha */
+  justify-content: flex-start;  /* Alinea el contenido hacia la derecha */
   border-bottom: 1px solid #ccc;
 }
 
