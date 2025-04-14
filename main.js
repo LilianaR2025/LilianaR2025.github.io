@@ -233,7 +233,7 @@ controlsContainer.style.zIndex = '1000';
 controlsContainer.style.borderRadius = '5px';
 
 controlsContainer.innerHTML = `
-  <label><strong>Personas afectadas por eventos naturales*</strong></label>
+  <label><strong>Personas afectadas por inundaciones*</strong></label>
 <br>
 <label><em>(Active la capa que desea ver)</em></label>
 <br>
